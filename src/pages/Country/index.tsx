@@ -1,9 +1,8 @@
 import { useParams } from "react-router-dom";
 
 function Country() {
-  let { id } = useParams();
-  console.log(id);
-  return <div>Country</div>;
+  let { id } = useParams<{ id: string }>();
+  return <div>{id}</div>;
 }
 
 export default Country;
