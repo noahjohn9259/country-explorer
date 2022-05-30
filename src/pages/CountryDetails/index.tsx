@@ -94,7 +94,7 @@ function CountryDetails() {
                   Sub Region:
                 </Typography>
                 <Typography variant="subtitle2" component="strong" pr={1}>
-                  {country.subregion}
+                  {country?.subregion}
                 </Typography>
               </Grid>
               <Grid item xs={6} />
@@ -105,7 +105,7 @@ function CountryDetails() {
                   Capital:
                 </Typography>
                 <Typography variant="subtitle2" component="strong" pr={1}>
-                  {country.capital.join(", ")}
+                  {country.capital?.join(", ")}
                 </Typography>
               </Grid>
               <Grid item xs={6} />
