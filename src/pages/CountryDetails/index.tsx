@@ -1,12 +1,13 @@
 import { Grid, Container, Typography, Box, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { Country } from "../../types";
 import Layout from "../../components/Layout";
 
 function CountryDetails() {
   let { id } = useParams<{ id: string }>();
+  let history = useHistory();
   const [country, setCountry] = useState<Country | null>(null);
   useEffect(() => {
     fetch(
@@ -26,7 +27,9 @@ function CountryDetails() {
     <Layout>
       <Container maxWidth="lg" sx={{ paddingY: 10 }}>
         <Box>
-          <Button variant="outlined">Back</Button>
+          <Button variant="outlined" onClick={() => history.push("/")}>
+            Back
+          </Button>
         </Box>
         <Grid container columnSpacing={5} sx={{ paddingY: 10 }}>
           <Grid item xs={6}>
@@ -42,36 +45,36 @@ function CountryDetails() {
                 </Typography>
                 <Grid container spacing={2} mb={1}>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2" component="span" pr={1}>
+                    <Typography variant="subtitle2" component="span" pr={0.25}>
                       Native name:
                     </Typography>
-                    <Typography variant="body2" component="span" pr={1}>
+                    <Typography variant="body2" component="span" pr={0.25}>
                       {country.name.common}
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2" component="span" pr={1}>
+                    <Typography variant="subtitle2" component="span" pr={0.25}>
                       Top Level Domain:
                     </Typography>
-                    <Typography variant="body2" component="span" pr={1}>
+                    <Typography variant="body2" component="span" pr={0.25}>
                       {country.tld.join(", ")}
                     </Typography>
                   </Grid>
                 </Grid>
                 <Grid container spacing={2} mb={1}>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2" component="span" pr={1}>
+                    <Typography variant="subtitle2" component="span" pr={0.25}>
                       Population:
                     </Typography>
-                    <Typography variant="body2" component="span" pr={1}>
+                    <Typography variant="body2" component="span" pr={0.25}>
                       {country.population}
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2" component="span" pr={1}>
+                    <Typography variant="subtitle2" component="span" pr={0.25}>
                       Currencies:
                     </Typography>
-                    <Typography variant="body2" component="span" pr={1}>
+                    <Typography variant="body2" component="span" pr={0.25}>
                       {Object.values(country.currencies).map(
                         ({ name }) => name
                       )}
@@ -80,18 +83,18 @@ function CountryDetails() {
                 </Grid>
                 <Grid container spacing={2} mb={1}>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2" component="span" pr={1}>
+                    <Typography variant="subtitle2" component="span" pr={0.25}>
                       Region:
                     </Typography>
-                    <Typography variant="body2" component="span" pr={1}>
+                    <Typography variant="body2" component="span" pr={0.25}>
                       {country.region}
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2" component="span" pr={1}>
+                    <Typography variant="subtitle2" component="span" pr={0.25}>
                       Languages:
                     </Typography>
-                    <Typography variant="body2" component="span" pr={1}>
+                    <Typography variant="body2" component="span" pr={0.25}>
                       {Object.values(country.languages)
                         .reduce<string[]>((acc, curr) => [...acc, curr], [])
                         .join(", ")}
@@ -100,10 +103,10 @@ function CountryDetails() {
                 </Grid>
                 <Grid container spacing={2} mb={1}>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2" component="span" pr={1}>
+                    <Typography variant="subtitle2" component="span" pr={0.25}>
                       Sub Region:
                     </Typography>
-                    <Typography variant="body2" component="span" pr={1}>
+                    <Typography variant="body2" component="span" pr={0.25}>
                       {country.subregion}
                     </Typography>
                   </Grid>
@@ -111,10 +114,10 @@ function CountryDetails() {
                 </Grid>
                 <Grid container spacing={2} mb={1}>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2" component="span" pr={1}>
+                    <Typography variant="subtitle2" component="span" pr={0.25}>
                       Capital:
                     </Typography>
-                    <Typography variant="body2" component="span" pr={1}>
+                    <Typography variant="body2" component="span" pr={0.25}>
                       {country.capital.join(", ")}
                     </Typography>
                   </Grid>
