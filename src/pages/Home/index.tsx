@@ -31,7 +31,7 @@ function Home() {
   );
   const { darkMode } = useDarkMode();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading || !countries) return <div>Loading...</div>;
 
   return (
     <Layout isFrontPage>
