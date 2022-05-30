@@ -4,6 +4,7 @@ import {
   GlobalStyles,
   ThemeProvider,
 } from "@mui/material";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { useDarkMode } from "./atoms/darkMode";
@@ -11,12 +12,16 @@ import { useDarkMode } from "./atoms/darkMode";
 import Home from "./pages/Home";
 import CountryDetails from "./pages/CountryDetails";
 
+const queryClient = new QueryClient();
+
 function App() {
   const { darkMode } = useDarkMode();
+
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
     },
+    components: {},
     typography: {
       fontFamily: [
         "'Nunito Sans'",
@@ -57,16 +62,16 @@ function App() {
           img: { height: "auto", maxWidth: "100%" },
         }}
       />
-      <Router>
-        <Switch>
-          <Route path="/country/:id">
-            <CountryDetails />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Switch>
+            <Route path="/country/:id">
+              <CountryDetails />
+            </Route>
+            <Route path="/" component={Home} />
+          </Switch>
+        </Router>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

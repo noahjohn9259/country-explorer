@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useQuery } from "react-query";
 import {
   Box,
   Card,
@@ -18,15 +18,21 @@ import {
 import { Country } from "../../types";
 import Layout from "../../components/Layout";
 import { useDarkMode } from "../../atoms/darkMode";
+import fetchCountries from "../../apis/fetchCountries";
 
 function Home() {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const { darkMode, toggleDarkMode } = useDarkMode();
-  useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
-      .then((response) => response.json())
-      .then((data) => setCountries(data));
-  }, []);
+  const history = useHistory();
+  const { isLoading, data: countries } = useQuery<Country[]>(
+    "countries",
+    fetchCountries,
+    {
+      staleTime: 60000,
+    }
+  );
+  const { darkMode } = useDarkMode();
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <Layout isFrontPage>
       <Box sx={{ flexGrow: 1 }}>
@@ -59,63 +65,66 @@ function Home() {
             <Grid container columnSpacing={12} rowSpacing={4}>
               {countries.map((item) => (
                 <Grid key={item.name.common} item xs={3}>
-                  <Link to={`/country/${item.name.common.replace(" ", "_")}`}>
-                    <Card
-                      raised
-                      sx={{ backgroundColor: darkMode ? "#2B3743" : "#fff" }}
+                  <Card sx={{ backgroundColor: darkMode ? "#2B3743" : "#fff" }}>
+                    <CardActionArea
+                      LinkComponent="a"
+                      href={`/country/${item.name.common.replace(" ", "_")}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push(
+                          `/country/${item.name.common.replace(" ", "_")}`
+                        );
+                      }}
                     >
-                      <CardActionArea>
-                        <CardMedia
-                          component="img"
-                          height="160"
-                          image={item.flags.svg}
-                          alt="green iguana"
-                          sx={{ objectFit: "contain" }}
-                        />
-                        <CardContent>
-                          <Typography variant="h6" component="h6">
-                            {item.name.common}
+                      <CardMedia
+                        component="img"
+                        height="160"
+                        image={item.flags.svg}
+                        alt="green iguana"
+                      />
+                      <CardContent>
+                        <Typography variant="h6" component="h6">
+                          {item.name.common}
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                          <Typography
+                            variant="subtitle2"
+                            component="strong"
+                            pr={1}
+                          >
+                            Population:
                           </Typography>
-                          <Typography variant="body2" gutterBottom>
-                            <Typography
-                              variant="subtitle2"
-                              component="strong"
-                              pr={1}
-                            >
-                              Population:
-                            </Typography>
-                            <Typography variant="body2" component="span">
-                              {item.population}
-                            </Typography>
+                          <Typography variant="body2" component="span">
+                            {item.population}
                           </Typography>
-                          <Typography variant="body2" gutterBottom>
-                            <Typography
-                              variant="subtitle2"
-                              component="strong"
-                              pr={1}
-                            >
-                              Region:
-                            </Typography>
-                            <Typography variant="body2" component="span">
-                              {item.population}
-                            </Typography>
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                          <Typography
+                            variant="subtitle2"
+                            component="strong"
+                            pr={1}
+                          >
+                            Region:
                           </Typography>
-                          <Typography variant="body2" gutterBottom>
-                            <Typography
-                              variant="subtitle2"
-                              component="strong"
-                              pr={1}
-                            >
-                              Capital:
-                            </Typography>
-                            <Typography variant="body2" component="span">
-                              {item.population}
-                            </Typography>
+                          <Typography variant="body2" component="span">
+                            {item.population}
                           </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </Link>
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                          <Typography
+                            variant="subtitle2"
+                            component="strong"
+                            pr={1}
+                          >
+                            Capital:
+                          </Typography>
+                          <Typography variant="body2" component="span">
+                            {item.population}
+                          </Typography>
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
                 </Grid>
               ))}
             </Grid>

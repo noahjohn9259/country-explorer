@@ -1,27 +1,22 @@
+import { useQuery } from "react-query";
 import { Grid, Typography, Box, Button, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import { Country } from "../../types";
 import Layout from "../../components/Layout";
+import fetchCountry from "../../apis/fetchCountry";
 
 function CountryDetails() {
   let { id } = useParams<{ id: string }>();
   let history = useHistory();
-  const [country, setCountry] = useState<Country | null>(null);
-  useEffect(() => {
-    fetch(
-      `https://restcountries.com/v3.1/name/${id.replace(
-        "_",
-        " "
-      )}?fullText=true`
-    )
-      .then((response) => response.json())
-      .then((data) => setCountry(data[0]));
-  }, []);
+  const { isLoading, data } = useQuery<Country[]>(
+    ["country", id],
+    () => fetchCountry(id),
+    { staleTime: 60000 }
+  );
 
-  if (!country) return null;
-  console.log(country);
+  if (isLoading || !data) return <div>Loading...</div>;
+  const country = data[0];
 
   return (
     <Layout>
