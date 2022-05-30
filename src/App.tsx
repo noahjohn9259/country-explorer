@@ -1,12 +1,37 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import {
+  createTheme,
+  CssBaseline,
+  GlobalStyles,
+  ThemeProvider,
+} from "@mui/material";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import CountryDetails from "./pages/CountryDetails";
-import "./App.css";
 
 function App() {
   const theme = createTheme({
+    typography: {
+      fontFamily: [
+        "'Nunito Sans'",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      subtitle2: {
+        fontWeight: 600,
+      },
+      h4: {
+        fontWeight: 800,
+      },
+    },
     breakpoints: {
       values: {
         xs: 0,
@@ -19,6 +44,8 @@ function App() {
   });
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <GlobalStyles styles={{ img: { height: "auto", maxWidth: "100%" } }} />
       <Router>
         <Switch>
           <Route path="/country/:id">
