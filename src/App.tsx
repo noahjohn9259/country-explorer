@@ -22,6 +22,13 @@ function App() {
       mode: darkMode ? "dark" : "light",
     },
     components: {
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            boxShadow: "0px 0px 8px rgb(0 0 0 / 5%)",
+          },
+        },
+      },
       MuiCardContent: {
         styleOverrides: {
           root: {
