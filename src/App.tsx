@@ -21,7 +21,15 @@ function App() {
     palette: {
       mode: darkMode ? "dark" : "light",
     },
-    components: {},
+    components: {
+      MuiCardContent: {
+        styleOverrides: {
+          root: {
+            padding: 24,
+          },
+        },
+      },
+    },
     typography: {
       fontFamily: [
         "'Nunito Sans'",
@@ -41,6 +49,11 @@ function App() {
       },
       h4: {
         fontWeight: 800,
+      },
+      h6: {
+        marginBottom: 16,
+        fontSize: 18,
+        fontWeight: 600,
       },
     },
     breakpoints: {
