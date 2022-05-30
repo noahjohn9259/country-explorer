@@ -1,3 +1,8 @@
+type Currency = {
+  name: string;
+  symbol: string;
+};
+
 export type Country = {
   name: {
     common: string;
@@ -6,4 +11,8 @@ export type Country = {
     png: string;
   };
   population: number;
+  tld: string[];
+  currencies: Record<string, Currency>;
+  region: string;
+  languages: Record<string, string>;
 };

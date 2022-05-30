@@ -2,7 +2,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Country from "./pages/Country";
+import CountryDetails from "./pages/CountryDetails";
 import "./App.css";
 
 function App() {
@@ -21,11 +21,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
+          <Route path="/country/:id">
+            <CountryDetails />
+          </Route>
           <Route path="/">
             <Home />
-          </Route>
-          <Route path="/country/:id">
-            <Country />
           </Route>
         </Switch>
       </Router>
