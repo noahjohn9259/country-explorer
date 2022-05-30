@@ -14,5 +14,7 @@ export type Country = {
   tld: string[];
   currencies: Record<string, Currency>;
   region: string;
+  subregion: string;
   languages: Record<string, string>;
+  capital: string[];
 };
