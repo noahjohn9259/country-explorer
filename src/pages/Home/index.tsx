@@ -10,36 +10,26 @@ import {
   Grid,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
   Stack,
-  styled,
   TextField,
   Typography,
 } from "@mui/material";
 import { Country } from "../../types";
 import Layout from "../../components/Layout";
+import { useDarkMode } from "../../atoms/darkMode";
 
 function Home() {
   const [countries, setCountries] = useState<Country[]>([]);
+  const { darkMode, toggleDarkMode } = useDarkMode();
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
       .then((data) => setCountries(data));
   }, []);
-
-  const Item = styled(Paper)(({ theme }) => ({
-    boxShadow: theme.shadows[8],
-    // backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    // ...theme.typography.body2,
-    padding: theme.spacing(4),
-    // textAlign: "center",
-    // color: theme.palette.text.secondary,
-  }));
-  console.log(countries[0]);
   return (
-    <Layout>
-      <Box sx={{ flexGrow: 1, backgroundColor: "#fafafa" }}>
+    <Layout isFrontPage>
+      <Box sx={{ flexGrow: 1 }}>
         <Container maxWidth="lg">
           <Stack
             direction="row"
@@ -66,17 +56,21 @@ function Home() {
             </Box>
           </Stack>
           <Box>
-            <Grid container columnSpacing={12}>
+            <Grid container columnSpacing={12} rowSpacing={4}>
               {countries.map((item) => (
                 <Grid key={item.name.common} item xs={3}>
                   <Link to={`/country/${item.name.common.replace(" ", "_")}`}>
-                    <Card>
+                    <Card
+                      raised
+                      sx={{ backgroundColor: darkMode ? "#2B3743" : "#fff" }}
+                    >
                       <CardActionArea>
                         <CardMedia
                           component="img"
-                          height="140"
-                          image={item.flags.png}
+                          height="160"
+                          image={item.flags.svg}
                           alt="green iguana"
+                          sx={{ objectFit: "contain" }}
                         />
                         <CardContent>
                           <Typography variant="h6" component="h6">

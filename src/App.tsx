@@ -6,11 +6,17 @@ import {
 } from "@mui/material";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { useDarkMode } from "./atoms/darkMode";
+
 import Home from "./pages/Home";
 import CountryDetails from "./pages/CountryDetails";
 
 function App() {
+  const { darkMode } = useDarkMode();
   const theme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light",
+    },
     typography: {
       fontFamily: [
         "'Nunito Sans'",
@@ -45,7 +51,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <GlobalStyles styles={{ img: { height: "auto", maxWidth: "100%" } }} />
+      <GlobalStyles
+        styles={{
+          body: { backgroundColor: darkMode ? "#202D36" : "#fafafa" },
+          img: { height: "auto", maxWidth: "100%" },
+        }}
+      />
       <Router>
         <Switch>
           <Route path="/country/:id">

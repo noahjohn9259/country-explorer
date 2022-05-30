@@ -19,3 +19,5 @@ export type Country = {
   languages: Record<string, string>;
   capital: string[];
 };
+
+export type Theme = "light" | "dark";
