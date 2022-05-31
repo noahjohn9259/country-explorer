@@ -22,10 +22,36 @@ function App() {
       mode: darkMode ? "dark" : "light",
     },
     components: {
+      MuiToolbar: {
+        styleOverrides: {
+          root: {
+            paddingLeft: 0,
+            paddingRight: 0,
+            "@media (min-width: 640px)": {
+              paddingLeft: 0,
+              paddingRight: 0,
+            },
+          },
+        },
+      },
       MuiPaper: {
         styleOverrides: {
           root: {
-            boxShadow: "0px 0px 8px rgb(0 0 0 / 5%)",
+            boxShadow: !darkMode
+              ? "0px 0px 8px rgb(0 0 0 / 5%)"
+              : "0px 2px 16px 4px rgba(0, 0, 0, 0.1)",
+            ":hover": {
+              boxShadow: !darkMode
+                ? "0px 4px 32px rgba(0, 0, 0, 5%)"
+                : "0px 4px 32px 8px rgba(0, 0, 0, 0.2)",
+            },
+          },
+        },
+      },
+      MuiCardActionArea: {
+        styleOverrides: {
+          focusHighlight: {
+            backgroundColor: !darkMode ? "#fff" : "#2C3844",
           },
         },
       },
@@ -66,13 +92,31 @@ function App() {
     breakpoints: {
       values: {
         xs: 0,
-        sm: 600,
-        md: 900,
-        lg: 1328,
-        xl: 1536,
+        sm: 640,
+        md: 1024,
+        lg: 1280,
+        xl: 1440,
       },
     },
   });
+
+  theme.typography.body1 = {
+    ...theme.typography.body1,
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.125rem",
+      fontWeight: 400,
+    },
+  };
+
+  theme.typography.h6 = {
+    ...theme.typography.h6,
+    fontSize: "1.125rem",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.375rem",
+      fontWeight: 800,
+    },
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

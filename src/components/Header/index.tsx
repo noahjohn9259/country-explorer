@@ -15,7 +15,12 @@ function Header({ ...otherProps }) {
         >
           <Container maxWidth="lg">
             <Toolbar sx={{ paddingX: 0 }}>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography
+                variant="h6"
+                marginBottom={0}
+                component="div"
+                sx={{ flexGrow: 1 }}
+              >
                 Where in the world?
               </Typography>
               <Button

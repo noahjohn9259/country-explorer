@@ -5,8 +5,6 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  CardMedia,
-  Container,
   Grid,
   InputLabel,
   MenuItem,
@@ -14,6 +12,8 @@ import {
   Stack,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { Country } from "../../types";
 import Layout from "../../components/Layout";
@@ -22,6 +22,9 @@ import fetchCountries from "../../apis/fetchCountries";
 
 function Home() {
   const history = useHistory();
+  const theme = useTheme();
+  const smMQ = useMediaQuery(theme.breakpoints.down("sm"));
+
   const { isLoading, data: countries } = useQuery<Country[]>(
     "countries",
     fetchCountries,
@@ -63,9 +66,15 @@ function Home() {
           </Box>
         </Stack>
         <Box>
-          <Grid container columnSpacing={12} rowSpacing={4}>
+          <Grid
+            container
+            columnSpacing={{ md: 9.5 }}
+            rowSpacing={4}
+            // columns={{ xs: 8, sm: 10, md: 12 }}
+            justifyContent="center"
+          >
             {countries.map((item) => (
-              <Grid key={item.name.common} item xs={3}>
+              <Grid key={item.name.common} item xs={10} sm={10} md={3}>
                 <Card sx={{ backgroundColor: darkMode ? "#2B3743" : "#fff" }}>
                   <CardActionArea
                     href={`/country/${item.name.common.replace(" ", "_")}`}
@@ -76,51 +85,36 @@ function Home() {
                       );
                     }}
                   >
-                    <CardMedia
-                      component="img"
-                      height="160"
-                      image={item.flags.svg}
-                      alt="green iguana"
+                    <Box
+                      sx={{
+                        height: !smMQ ? 160 : 198,
+                        backgroundPosition: "left top",
+                        backgroundSize: "cover",
+                        backgroundColor: "#fff",
+                        backgroundRepeat: "no-repeat",
+                        backgroundImage: `url(${item.flags.svg})`,
+                      }}
                     />
                     <CardContent>
-                      <Typography variant="h6" component="h6">
+                      <Typography
+                        variant="h6"
+                        component="h6"
+                        sx={{
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "clip",
+                        }}
+                      >
                         {item.name.common}
                       </Typography>
                       <Typography variant="body1" gutterBottom>
-                        <Typography
-                          variant="subtitle2"
-                          component="strong"
-                          pr={0.5}
-                        >
-                          Population:
-                        </Typography>
-                        <Typography variant="body1" component="span">
-                          {item.population}
-                        </Typography>
+                        Population: {item.population}
                       </Typography>
                       <Typography variant="body1" gutterBottom>
-                        <Typography
-                          variant="subtitle2"
-                          component="strong"
-                          pr={0.5}
-                        >
-                          Region:
-                        </Typography>
-                        <Typography variant="body1" component="span">
-                          {item.region}
-                        </Typography>
+                        Region: {item.region}
                       </Typography>
-                      <Typography variant="body1" gutterBottom>
-                        <Typography
-                          variant="subtitle2"
-                          component="strong"
-                          pr={0.5}
-                        >
-                          Capital:
-                        </Typography>
-                        <Typography variant="body1" component="span">
-                          {item.capital}
-                        </Typography>
+                      <Typography variant="body1">
+                        Capital: {item.capital}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
