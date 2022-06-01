@@ -1,23 +1,97 @@
 import { useQuery } from "react-query";
-import { Grid, Typography, Box, Button, Stack } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Box,
+  Button,
+  Stack,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { useParams, useHistory } from "react-router-dom";
 
 import { Country } from "../../types";
 import fetchCountry from "../../apis/fetchCountry";
 import Layout from "../../components/Layout";
 import PageLoader from "../../components/PageLoader";
+import BorderCountries from "./fragments/BorderCountries";
+
+type MetaInfo = { label: string; value: string };
 
 function CountryDetails() {
   let { id } = useParams<{ id: string }>();
   let history = useHistory();
-  const { isLoading, data } = useQuery<Country[]>(
-    ["country", id],
-    () => fetchCountry(id),
-    { staleTime: 60000 }
+  const theme = useTheme();
+  const smMQ = useMediaQuery(theme.breakpoints.down("sm"));
+  const { isLoading, data } = useQuery<Country[]>(["country", id], () =>
+    fetchCountry(id)
   );
 
   if (isLoading || !data) return <PageLoader />;
   const country = data[0];
+
+  const leftMetaInfo: MetaInfo[] = [
+    {
+      label: "Native name:",
+      value: country.name.common,
+    },
+    {
+      label: "Population:",
+      value: country.population.toString(),
+    },
+    {
+      label: "Region:",
+      value: country.region,
+    },
+    {
+      label: "Sub Region:",
+      value: country.subregion,
+    },
+    {
+      label: "Capital:",
+      value: country.capital.join(", "),
+    },
+  ];
+
+  const rightMetaInfo: MetaInfo[] = [
+    {
+      label: "Top Level Domain:",
+      value: country.tld.join(", "),
+    },
+    {
+      label: "Currencies:",
+      value: Object.values(country.currencies)
+        .map(({ name }) => name)
+        .join(", "),
+    },
+    {
+      label: "Languages:",
+      value: Object.values(country.languages)
+        .reduce<string[]>((acc, curr) => [...acc, curr], [])
+        .reverse()
+        .join(", "),
+    },
+  ];
+
+  const contentRender = (data: MetaInfo[]) => {
+    return (
+      <>
+        {data.map(({ label, value }, idx) => (
+          <Typography variant="body1" gutterBottom key={idx}>
+            <Box
+              sx={{ fontWeight: "bold", paddingRight: 0.5 }}
+              component="strong"
+            >
+              {label}
+            </Box>
+            <Box sx={{ fontWeight: "light" }} component="span">
+              {value}
+            </Box>
+          </Typography>
+        ))}
+      </>
+    );
+  };
 
   return (
     <Layout>
@@ -26,97 +100,47 @@ function CountryDetails() {
           Back
         </Button>
       </Box>
-      <Grid container columnSpacing={5} sx={{ paddingY: 10 }}>
-        <Grid item xs={6}>
-          <Box paddingRight={7}>
-            <img src={country.flags.svg} />
+      <Grid container columnSpacing={{ md: 10 }} sx={{ paddingY: 10 }}>
+        <Grid item xs={12} md={6}>
+          <Box paddingRight={2}>
+            <Box
+              sx={{
+                height: !smMQ ? 401 : 198,
+                backgroundPosition: "left top",
+                backgroundSize: "cover",
+                backgroundColor: "#fff",
+                backgroundRepeat: "no-repeat",
+                backgroundImage: `url(${country.flags.svg})`,
+              }}
+            />
           </Box>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Stack justifyContent="center" direction="column" height="100%">
             <Box>
-              <Typography variant="h4" component="div" mb={5}>
+              <Typography variant="h5" component="div" mb={5}>
                 {country.name.common}
               </Typography>
               <Grid container spacing={2} mb={1}>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" component="span" pr={0.5}>
-                    Native name:
-                  </Typography>
-                  <Typography variant="body2" component="span" pr={0.5}>
-                    {country.name.common}
-                  </Typography>
+                <Grid item xs={12} md={6}>
+                  {contentRender(leftMetaInfo)}
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" component="span" pr={0.5}>
-                    Top Level Domain:
-                  </Typography>
-                  <Typography variant="body2" component="span" pr={0.5}>
-                    {country.tld.join(", ")}
-                  </Typography>
+                <Grid item xs={12} md={6}>
+                  {contentRender(rightMetaInfo)}
                 </Grid>
-              </Grid>
-              <Grid container spacing={2} mb={1}>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" component="span" pr={0.5}>
-                    Population:
-                  </Typography>
-                  <Typography variant="body2" component="span" pr={0.5}>
-                    {country.population}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" component="span" pr={0.5}>
-                    Currencies:
-                  </Typography>
-                  <Typography variant="body2" component="span" pr={0.5}>
-                    {Object.values(country.currencies).map(({ name }) => name)}
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} mb={1}>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" component="span" pr={0.5}>
-                    Region:
-                  </Typography>
-                  <Typography variant="body2" component="span" pr={0.5}>
-                    {country.region}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" component="span" pr={0.5}>
-                    Languages:
-                  </Typography>
-                  <Typography variant="body2" component="span" pr={0.5}>
-                    {Object.values(country.languages)
-                      .reduce<string[]>((acc, curr) => [...acc, curr], [])
-                      .join(", ")}
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} mb={1}>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" component="span" pr={0.5}>
-                    Sub Region:
-                  </Typography>
-                  <Typography variant="body2" component="span" pr={0.5}>
-                    {country.subregion}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} />
-              </Grid>
-              <Grid container spacing={2} mb={1}>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle2" component="span" pr={0.5}>
-                    Capital:
-                  </Typography>
-                  <Typography variant="body2" component="span" pr={0.5}>
-                    {country.capital.join(", ")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} />
               </Grid>
             </Box>
+            <Typography variant="body1" marginTop={8}>
+              <Box
+                sx={{ fontWeight: "bold", paddingRight: 0.5 }}
+                display="flex"
+                alignItems="center"
+                component="strong"
+              >
+                <Box component="span">Border Countries:</Box>{" "}
+                <BorderCountries codes={country.borders} />
+              </Box>
+            </Typography>
           </Stack>
         </Grid>
       </Grid>

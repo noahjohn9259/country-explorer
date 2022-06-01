@@ -1,0 +1,1 @@
+export const STALE_TIME_DURATION = 60000;

@@ -7,12 +7,19 @@ import {
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { STALE_TIME_DURATION } from "./constants";
 import { useDarkMode } from "./atoms/darkMode";
 
 import Home from "./pages/Home";
 import CountryDetails from "./pages/CountryDetails";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: STALE_TIME_DURATION,
+    },
+  },
+});
 
 function App() {
   const { darkMode } = useDarkMode();
@@ -79,16 +86,19 @@ function App() {
         '"Segoe UI Symbol"',
       ].join(","),
       subtitle2: {
+        fontSize: 16,
         fontWeight: 600,
       },
-      h4: {
+      h5: {
         fontWeight: 800,
+        fontSize: 30,
       },
       h6: {
         marginBottom: 16,
         fontSize: 18,
         fontWeight: 600,
       },
+      fontWeightBold: 600,
     },
     breakpoints: {
       values: {

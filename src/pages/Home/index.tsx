@@ -27,10 +27,7 @@ function Home() {
 
   const { isLoading, data: countries } = useQuery<Country[]>(
     "countries",
-    fetchCountries,
-    {
-      staleTime: 60000,
-    }
+    fetchCountries
   );
   const { darkMode } = useDarkMode();
 

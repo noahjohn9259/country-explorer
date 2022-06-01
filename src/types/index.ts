@@ -18,6 +18,7 @@ export type Country = {
   subregion: string;
   languages: Record<string, string>;
   capital: string[];
+  borders: string[];
 };
 
 export type Theme = "light" | "dark";
