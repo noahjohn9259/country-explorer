@@ -5,12 +5,12 @@ import {
   Card,
   CardActionArea,
   CardContent,
+  CircularProgress,
   Grid,
-  InputLabel,
   MenuItem,
+  OutlinedInput,
   Select,
   Stack,
-  TextField,
   Typography,
   useMediaQuery,
   useTheme,
@@ -34,7 +34,17 @@ function Home() {
   );
   const { darkMode } = useDarkMode();
 
-  if (isLoading || !countries) return <div>Loading...</div>;
+  if (isLoading || !countries)
+    return (
+      <Box
+        justifyContent="center"
+        alignItems="center"
+        display="flex"
+        height="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
 
   console.log(countries[0]);
 
@@ -42,20 +52,18 @@ function Home() {
     <Layout isFrontPage>
       <Box sx={{ flexGrow: 1 }}>
         <Stack
-          direction="row"
+          direction={{ xs: "column", sm: "row" }}
           justifyContent="space-between"
           alignItems="center"
           spacing={2}
         >
-          <TextField hiddenLabel id="outlined-basic" label="Outlined" />
+          <OutlinedInput fullWidth placeholder="Search for a country..." />
           <Box>
-            <InputLabel id="demo-simple-select-label">
-              Filter by Region
-            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              // value={age}
+              value={0}
+              input={<OutlinedInput />}
               label="Filter by Region"
               onChange={() => {}}
             >
@@ -67,6 +75,7 @@ function Home() {
         </Stack>
         <Box>
           <Grid
+            marginTop={2}
             container
             columnSpacing={{ md: 9.5 }}
             rowSpacing={4}
