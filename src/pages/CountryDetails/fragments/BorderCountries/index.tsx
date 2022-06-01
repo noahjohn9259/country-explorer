@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton, Stack } from "@mui/material";
+import { Skeleton, Stack } from "@mui/material";
 import { useQuery } from "react-query";
 import { fetchCountriesByCodes } from "../../../../apis/fetchCountries";
 import { Country } from "../../../../types";
@@ -23,13 +23,13 @@ function BorderCountries({ codes }: Props) {
     );
 
   return (
-    <Box sx={{ marginLeft: 1 }}>
+    <Stack direction="row" flexWrap="wrap" rowGap={1}>
       {data?.map((item, idx) => (
         <CustomButton key={idx} variant="outlined">
           {item.name.common}
         </CustomButton>
       ))}
-    </Box>
+    </Stack>
   );
 }
 

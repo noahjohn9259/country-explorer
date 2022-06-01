@@ -1,20 +1,21 @@
+import { useParams, useHistory } from "react-router-dom";
 import { useQuery } from "react-query";
 import {
   Grid,
   Typography,
   Box,
-  Button,
   Stack,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { useParams, useHistory } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { Country } from "../../types";
 import fetchCountry from "../../apis/fetchCountry";
 import Layout from "../../components/Layout";
 import PageLoader from "../../components/PageLoader";
 import BorderCountries from "./fragments/BorderCountries";
+import { CustomButton } from "./styled";
 
 type MetaInfo = { label: string; value: string };
 
@@ -96,9 +97,13 @@ function CountryDetails() {
   return (
     <Layout>
       <Box>
-        <Button variant="outlined" onClick={() => history.push("/")}>
+        <CustomButton
+          variant="outlined"
+          startIcon={<ArrowBackIcon />}
+          onClick={() => history.push("/")}
+        >
           Back
-        </Button>
+        </CustomButton>
       </Box>
       <Grid container columnSpacing={{ md: 10 }} sx={{ paddingY: 10 }}>
         <Grid item xs={12} md={6}>
@@ -137,8 +142,10 @@ function CountryDetails() {
                 alignItems="center"
                 component="strong"
               >
-                <Box component="span">Border Countries:</Box>{" "}
-                <BorderCountries codes={country.borders} />
+                <Box component="span">Border Countries:</Box>
+                <Stack direction="row" marginLeft={2}>
+                  <BorderCountries codes={country.borders} />
+                </Stack>
               </Box>
             </Typography>
           </Stack>

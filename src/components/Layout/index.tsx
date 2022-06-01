@@ -1,6 +1,6 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, GlobalStyles } from "@mui/material";
 import { ReactNode } from "react";
-import Header from "../Header";
+import { useDarkMode } from "../../atoms/darkMode";
 
 type Props = {
   children: ReactNode;
@@ -8,9 +8,16 @@ type Props = {
 };
 
 function Layout({ children, isFrontPage }: Props) {
+  const { darkMode } = useDarkMode();
+  const pageBgColor = isFrontPage ? "#fafafa" : "#fff";
   return (
     <Box>
-      <Header windows={window} />
+      <GlobalStyles
+        styles={{
+          body: { backgroundColor: !darkMode ? pageBgColor : "#202D36" },
+          img: { height: "auto", maxWidth: "100%" },
+        }}
+      />
       <Container maxWidth="lg" sx={{ paddingY: isFrontPage ? 4 : 10 }}>
         {children}
       </Container>

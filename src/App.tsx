@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { STALE_TIME_DURATION } from "./constants";
 import { useDarkMode } from "./atoms/darkMode";
 
+import Header from "./components/Header";
 import Home from "./pages/Home";
 import CountryDetails from "./pages/CountryDetails";
 
@@ -32,8 +33,10 @@ function App() {
       MuiToolbar: {
         styleOverrides: {
           root: {
-            paddingLeft: 0,
-            paddingRight: 0,
+            "@media (min-width: 640px)": {
+              paddingLeft: 0,
+              paddingRight: 0,
+            },
             "@media (max-width: 639px)": {
               minHeight: 100,
               paddingLeft: 4,
@@ -105,7 +108,7 @@ function App() {
         xs: 0,
         sm: 640,
         md: 1024,
-        lg: 1280,
+        lg: 1328,
         xl: 1440,
       },
     },
@@ -138,6 +141,7 @@ function App() {
         }}
       />
       <QueryClientProvider client={queryClient}>
+        <Header windows={window} />
         <Router>
           <Switch>
             <Route path="/country/:id">

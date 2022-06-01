@@ -6,12 +6,16 @@ export const CustomButton = styled(Button)<ButtonProps>(({ theme }) => ({
     theme.palette.mode === "light"
       ? "0px 0px 4px rgba(0, 0, 0, 0.15)"
       : "0px 0px 8px rgba(0, 0, 0, 0.3)",
+  fontSize: theme.typography.body1.fontSize,
   marginLeft: theme.spacing(1),
   textTransform: "none",
   borderColor: "transparent",
   color: theme.palette.mode === "light" ? "#000" : "#fff",
-  paddingTop: theme.spacing(0.25),
-  paddingBottom: theme.spacing(0.25),
+  paddingTop: theme.spacing(1),
+  paddingBottom: theme.spacing(1),
+  paddingLeft: theme.spacing(4.5),
+  paddingRight: theme.spacing(4.5),
+  lineHeight: theme.spacing(2.75),
   backgroundColor: theme.palette.mode === "light" ? "#fff" : "#2B3743",
   "&:hover": {
     borderColor: "transparent",
