@@ -59,7 +59,7 @@ function App() {
           root: {
             paddingLeft: 16,
             boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.07)",
-            backgroundColor: "#fff",
+            backgroundColor: !darkMode ? "#fff" : "#2B3743",
             ":hover": {
               ".MuiOutlinedInput-notchedOutline": {
                 boxShadow: "0px 2px 16px rgba(0, 0, 0, 0.07)",
@@ -90,6 +90,7 @@ function App() {
       MuiPaper: {
         styleOverrides: {
           root: {
+            backgroundColor: !darkMode ? "#fff" : "#2B3743",
             boxShadow: !darkMode
               ? "0px 0px 8px rgb(0 0 0 / 5%)"
               : "0px 2px 16px 4px rgba(0, 0, 0, 0.1)",
@@ -119,6 +120,14 @@ function App() {
         styleOverrides: {
           paper: {
             marginTop: 4,
+          },
+        },
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            paddingLeft: 24,
+            paddingRight: 24,
           },
         },
       },

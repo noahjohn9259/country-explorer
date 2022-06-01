@@ -1,13 +1,14 @@
-import React from "react";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, useMediaQuery, useTheme } from "@mui/material";
 
 function PageLoader() {
+  const theme = useTheme();
+  const smMQ = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
       justifyContent="center"
       alignItems="center"
       display="flex"
-      height="100vh"
+      sx={{ paddingY: !smMQ ? 8 : 4 }}
     >
       <CircularProgress />
     </Box>

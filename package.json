@@ -13,12 +13,14 @@
     "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.1",
     "jotai": "^1.7.0",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-query": "^3.39.1",
     "react-router-dom": "^5.3.3"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.7",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/react-router-dom": "^5.3.3",

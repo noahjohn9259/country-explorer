@@ -1,6 +1,7 @@
-import { FC, useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "react-query";
+import debounce from "lodash.debounce";
 import {
   Box,
   Card,
@@ -29,13 +30,24 @@ function Home() {
   const theme = useTheme();
   const smMQ = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const [countryRecords, setCountryRecords] = useState<Country[]>([]);
   const [answer, setAnswer] = useState("all");
 
   const { isLoading, data: countries } = useQuery<Country[]>(
     ["countries", answer],
     () => fetchCountries(answer)
   );
+  useEffect(() => {
+    setCountryRecords(countries || []);
+  }, [countries]);
   const { darkMode } = useDarkMode();
+
+  const handleSearchText = debounce((text: string) => {
+    const newCountryRecords = (countries ?? []).filter((item) =>
+      item.name.common.toLowerCase().includes(text.toLowerCase())
+    );
+    setCountryRecords(newCountryRecords);
+  }, 250);
 
   return (
     <Layout isFrontPage>
@@ -53,6 +65,7 @@ function Home() {
                 <SearchIcon />
               </InputAdornment>
             }
+            onChange={(e) => handleSearchText(e.target.value)}
             sx={{ minWidth: 480 }}
           />
           <Box>
@@ -65,6 +78,7 @@ function Home() {
               }
               sx={{ minWidth: 200 }}
             >
+              <MenuItem value="all">All</MenuItem>
               {REGIONS.map((value, idx) => (
                 <MenuItem key={idx} value={value}>
                   {value}
@@ -84,7 +98,7 @@ function Home() {
               rowSpacing={4}
               justifyContent="center"
             >
-              {countries.map((item) => (
+              {(countryRecords ?? []).map((item) => (
                 <Grid key={item.name.common} item xs={10} sm={10} md={3}>
                   <Card sx={{ backgroundColor: darkMode ? "#2B3743" : "#fff" }}>
                     <CardActionArea
@@ -99,7 +113,7 @@ function Home() {
                       <Box
                         sx={{
                           height: !smMQ ? 160 : 198,
-                          backgroundPosition: "left top",
+                          backgroundPosition: "center top",
                           backgroundSize: "cover",
                           backgroundColor: "#fff",
                           backgroundRepeat: "no-repeat",
