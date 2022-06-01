@@ -5,7 +5,10 @@ export const fetchCountriesByCodes = async (codes: string[]) => {
   return res.json();
 };
 
-export default async () => {
-  const res = await fetch("https://restcountries.com/v3.1/all");
+export default async (regionName: string) => {
+  let endpointToUse = "https://restcountries.com/v3.1/all";
+  if (regionName && regionName !== "all")
+    endpointToUse = `https://restcountries.com/v3.1/region/${regionName}`;
+  const res = await fetch(endpointToUse);
   return res.json();
 };

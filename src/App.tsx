@@ -30,10 +30,19 @@ function App() {
       mode: darkMode ? "dark" : "light",
     },
     components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            fontSize: 16,
+            fontWeight: 600,
+          },
+        },
+      },
       MuiToolbar: {
         styleOverrides: {
           root: {
             "@media (min-width: 640px)": {
+              minHeight: 80,
               paddingLeft: 0,
               paddingRight: 0,
             },
@@ -42,6 +51,39 @@ function App() {
               paddingLeft: 4,
               paddingRight: 4,
             },
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            paddingLeft: 16,
+            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.07)",
+            backgroundColor: "#fff",
+            ":hover": {
+              ".MuiOutlinedInput-notchedOutline": {
+                boxShadow: "0px 2px 16px rgba(0, 0, 0, 0.07)",
+                borderColor: "transparent",
+              },
+            },
+          },
+          notchedOutline: {
+            borderColor: "transparent",
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          outlined: {
+            paddingLeft: 8,
+          },
+        },
+      },
+      MuiInputAdornment: {
+        styleOverrides: {
+          root: {
+            paddingLeft: 8,
+            paddingRight: 8,
           },
         },
       },
@@ -70,6 +112,13 @@ function App() {
         styleOverrides: {
           root: {
             padding: 24,
+          },
+        },
+      },
+      MuiPopover: {
+        styleOverrides: {
+          paper: {
+            marginTop: 4,
           },
         },
       },

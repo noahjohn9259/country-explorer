@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useQuery } from "react-query";
 import {
@@ -17,10 +18,11 @@ import PageLoader from "../../components/PageLoader";
 import BorderCountries from "./fragments/BorderCountries";
 import { CustomButton } from "./styled";
 
-type MetaInfo = { label: string; value: string };
+type MetaInfo = { label: string; value: ReactNode };
 
 function CountryDetails() {
   let { id } = useParams<{ id: string }>();
+
   let history = useHistory();
   const theme = useTheme();
   const smMQ = useMediaQuery(theme.breakpoints.down("sm"));
@@ -50,7 +52,9 @@ function CountryDetails() {
     },
     {
       label: "Capital:",
-      value: country.capital.join(", "),
+      value: country.capital?.join(", ") ?? (
+        <Typography component="span">-</Typography>
+      ),
     },
   ];
 
@@ -61,9 +65,13 @@ function CountryDetails() {
     },
     {
       label: "Currencies:",
-      value: Object.values(country.currencies)
-        .map(({ name }) => name)
-        .join(", "),
+      value: country.currencies ? (
+        Object.values(country.currencies)
+          .map(({ name }) => name)
+          .join(", ")
+      ) : (
+        <Typography component="span">-</Typography>
+      ),
     },
     {
       label: "Languages:",
@@ -135,7 +143,7 @@ function CountryDetails() {
                 </Grid>
               </Grid>
             </Box>
-            <Typography variant="body1" marginTop={8}>
+            <Box marginTop={8}>
               <Box
                 sx={{ fontWeight: "bold", paddingRight: 0.5 }}
                 display="flex"
@@ -144,10 +152,10 @@ function CountryDetails() {
               >
                 <Box component="span">Border Countries:</Box>
                 <Stack direction="row" marginLeft={2}>
-                  <BorderCountries codes={country.borders} />
+                  <BorderCountries codes={country.borders ?? []} />
                 </Stack>
               </Box>
-            </Typography>
+            </Box>
           </Stack>
         </Grid>
       </Grid>

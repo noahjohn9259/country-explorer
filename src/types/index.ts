@@ -13,12 +13,12 @@ export type Country = {
   };
   population: number;
   tld: string[];
-  currencies: Record<string, Currency>;
+  currencies?: Record<string, Currency>;
   region: string;
   subregion: string;
   languages: Record<string, string>;
-  capital: string[];
-  borders: string[];
+  capital?: string[];
+  borders?: string[];
 };
 
 export type Theme = "light" | "dark";

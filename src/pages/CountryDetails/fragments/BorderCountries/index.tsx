@@ -1,4 +1,4 @@
-import { Skeleton, Stack } from "@mui/material";
+import { Skeleton, Stack, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { fetchCountriesByCodes } from "../../../../apis/fetchCountries";
 import { Country } from "../../../../types";
@@ -9,9 +9,15 @@ type Props = {
 };
 
 function BorderCountries({ codes }: Props) {
-  const { isLoading, data } = useQuery<Country[]>(["country", ...codes], () =>
-    fetchCountriesByCodes(codes)
+  const { isLoading, data } = useQuery<Country[]>(
+    ["country", ...codes],
+    () => fetchCountriesByCodes(codes),
+    {
+      enabled: codes.length > 0,
+    }
   );
+
+  if (!isLoading && !data) return <Typography component="span">-</Typography>;
 
   if (isLoading || !data)
     return (
@@ -26,7 +32,9 @@ function BorderCountries({ codes }: Props) {
     <Stack direction="row" flexWrap="wrap" rowGap={1}>
       {data?.map((item, idx) => (
         <CustomButton key={idx} variant="outlined">
-          {item.name.common}
+          <Typography variant="body1" component="span">
+            {item.name.common}
+          </Typography>
         </CustomButton>
       ))}
     </Stack>

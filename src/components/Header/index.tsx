@@ -28,6 +28,7 @@ function Header({ ...otherProps }) {
                 color="inherit"
                 startIcon={<DarkModeOutlinedIcon />}
                 onClick={toggleDarkMode}
+                sx={{ textTransform: "none" }}
               >
                 Dark Mode
               </Button>
