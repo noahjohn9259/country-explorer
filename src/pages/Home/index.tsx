@@ -5,7 +5,6 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  CircularProgress,
   Grid,
   MenuItem,
   OutlinedInput,
@@ -17,6 +16,7 @@ import {
 } from "@mui/material";
 import { Country } from "../../types";
 import Layout from "../../components/Layout";
+import PageLoader from "../../components/PageLoader";
 import { useDarkMode } from "../../atoms/darkMode";
 import fetchCountries from "../../apis/fetchCountries";
 
@@ -34,17 +34,7 @@ function Home() {
   );
   const { darkMode } = useDarkMode();
 
-  if (isLoading || !countries)
-    return (
-      <Box
-        justifyContent="center"
-        alignItems="center"
-        display="flex"
-        height="100vh"
-      >
-        <CircularProgress />
-      </Box>
-    );
+  if (isLoading || !countries) return <PageLoader />;
 
   console.log(countries[0]);
 

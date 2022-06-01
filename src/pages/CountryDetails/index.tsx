@@ -3,8 +3,9 @@ import { Grid, Typography, Box, Button, Stack } from "@mui/material";
 import { useParams, useHistory } from "react-router-dom";
 
 import { Country } from "../../types";
-import Layout from "../../components/Layout";
 import fetchCountry from "../../apis/fetchCountry";
+import Layout from "../../components/Layout";
+import PageLoader from "../../components/PageLoader";
 
 function CountryDetails() {
   let { id } = useParams<{ id: string }>();
@@ -15,7 +16,7 @@ function CountryDetails() {
     { staleTime: 60000 }
   );
 
-  if (isLoading || !data) return <div>Loading...</div>;
+  if (isLoading || !data) return <PageLoader />;
   const country = data[0];
 
   return (
