@@ -128,7 +128,7 @@ function CountryDetails() {
             />
           </Box>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} paddingTop={{ xs: 12, sm: 0 }}>
           <Stack justifyContent="center" direction="column" height="100%">
             <Box>
               <Typography variant="h5" component="div" mb={5}>
@@ -147,11 +147,16 @@ function CountryDetails() {
               <Box
                 sx={{ fontWeight: "bold", paddingRight: 0.5 }}
                 display="flex"
-                alignItems="center"
+                alignItems={{ xs: "flex-start", sm: "center" }}
                 component="strong"
+                flexDirection={{ xs: "column", sm: "row" }}
               >
                 <Box component="span">Border Countries:</Box>
-                <Stack direction="row" marginLeft={2}>
+                <Stack
+                  direction="row"
+                  marginLeft={{ xs: 0, sm: 2 }}
+                  marginTop={{ xs: 3, sm: 0 }}
+                >
                   <BorderCountries codes={country.borders ?? []} />
                 </Stack>
               </Box>

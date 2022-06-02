@@ -18,7 +18,13 @@ function Layout({ children, isFrontPage }: Props) {
           img: { height: "auto", maxWidth: "100%" },
         }}
       />
-      <Container maxWidth="lg" sx={{ paddingY: isFrontPage ? 4 : 10 }}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          paddingY: isFrontPage ? 4 : 10,
+          paddingX: 2.5,
+        }}
+      >
         {children}
       </Container>
     </Box>

@@ -6,7 +6,6 @@ export const CustomButton = styled(Button)<ButtonProps>(({ theme }) => ({
     theme.palette.mode === "light"
       ? "0px 0px 4px rgba(0, 0, 0, 0.15)"
       : "0px 0px 8px rgba(0, 0, 0, 0.3)",
-  marginLeft: theme.spacing(1),
   textTransform: "none",
   borderColor: "transparent",
   color: theme.palette.mode === "light" ? "#000" : "#fff",

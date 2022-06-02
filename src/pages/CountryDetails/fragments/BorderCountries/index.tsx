@@ -29,7 +29,7 @@ function BorderCountries({ codes }: Props) {
     );
 
   return (
-    <Stack direction="row" flexWrap="wrap" rowGap={1}>
+    <Stack direction="row" flexWrap="wrap" columnGap={{ xs: 2.5, sm: 1 }}>
       {data?.map((item, idx) => (
         <CustomButton key={idx} variant="outlined">
           <Typography variant="body1" component="span">
