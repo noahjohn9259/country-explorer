@@ -1,4 +1,5 @@
 import { AppBar, Button, Container, Toolbar, Typography } from "@mui/material";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import ElevationScroll from "../ElevationScroll";
 import { useDarkMode } from "../../atoms/darkMode";
@@ -24,13 +25,20 @@ function Header({ ...otherProps }) {
                 Where in the world?
               </Typography>
               <Button
-                disableRipple
                 color="inherit"
-                startIcon={<DarkModeOutlinedIcon />}
+                variant="text"
+                disableRipple
+                startIcon={
+                  darkMode ? <WbSunnyIcon /> : <DarkModeOutlinedIcon />
+                }
                 onClick={toggleDarkMode}
-                sx={{ textTransform: "none" }}
+                sx={{
+                  textTransform: "none",
+                  fontWeight: "400",
+                  color: "typography.allVariants.color",
+                }}
               >
-                Dark Mode
+                {darkMode ? "Light" : "Dark"} Mode
               </Button>
             </Toolbar>
           </Container>

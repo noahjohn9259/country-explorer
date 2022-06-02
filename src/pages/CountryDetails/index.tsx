@@ -88,8 +88,8 @@ function CountryDetails() {
         {data.map(({ label, value }, idx) => (
           <Typography variant="body1" gutterBottom key={idx}>
             <Box
-              sx={{ fontWeight: "bold", paddingRight: 0.5 }}
-              component="strong"
+              sx={{ fontWeight: "regular", paddingRight: 0.5 }}
+              component="span"
             >
               {label}
             </Box>
@@ -113,13 +113,13 @@ function CountryDetails() {
           Back
         </CustomButton>
       </Box>
-      <Grid container columnSpacing={{ md: 10 }} sx={{ paddingY: 10 }}>
+      <Grid container columnSpacing={{ md: 10 }} sx={{ paddingY: 8 }}>
         <Grid item xs={12} md={6}>
           <Box paddingRight={2}>
             <Box
               sx={{
-                height: !smMQ ? 401 : 198,
-                backgroundPosition: "left top",
+                height: !smMQ ? 401 : 230,
+                backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundColor: "#fff",
                 backgroundRepeat: "no-repeat",
@@ -128,13 +128,13 @@ function CountryDetails() {
             />
           </Box>
         </Grid>
-        <Grid item xs={12} md={6} paddingTop={{ xs: 12, sm: 0 }}>
+        <Grid item xs={12} md={6} paddingTop={{ xs: 8, sm: 0 }}>
           <Stack justifyContent="center" direction="column" height="100%">
             <Box>
               <Typography variant="h5" component="div" mb={5}>
                 {country.name.common}
               </Typography>
-              <Grid container spacing={2} mb={1}>
+              <Grid container spacing={{ xs: 6, sm: 2 }} mb={1}>
                 <Grid item xs={12} md={6}>
                   {contentRender(leftMetaInfo)}
                 </Grid>
@@ -143,7 +143,7 @@ function CountryDetails() {
                 </Grid>
               </Grid>
             </Box>
-            <Box marginTop={8}>
+            <Box paddingTop={{ xs: 6, sm: 8 }}>
               <Box
                 sx={{ fontWeight: "bold", paddingRight: 0.5 }}
                 display="flex"

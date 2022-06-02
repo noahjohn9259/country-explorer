@@ -21,7 +21,7 @@ function Layout({ children, isFrontPage }: Props) {
       <Container
         maxWidth="lg"
         sx={{
-          paddingY: isFrontPage ? 4 : 10,
+          paddingY: isFrontPage ? 4 : 5,
           paddingX: 2.5,
         }}
       >
