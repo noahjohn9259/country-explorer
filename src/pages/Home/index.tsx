@@ -85,7 +85,7 @@ function Home() {
               }
               fullWidth
             >
-              <MenuItem value="all">All</MenuItem>
+              <MenuItem value="all">-</MenuItem>
               {REGIONS.map((value, idx) => (
                 <MenuItem key={idx} value={value}>
                   {value}
@@ -101,13 +101,13 @@ function Home() {
             <Grid
               marginTop={{ xs: 1, sm: 2 }}
               container
-              columnSpacing={{ md: 9.5 }}
+              columnSpacing={{ sm: 4, md: 9.5, lg: 9.5 }}
               rowSpacing={4}
               justifyContent="center"
             >
               {(countryRecords ?? []).map((item) => (
-                <Grid key={item.name.common} item xs={10} sm={10} md={3}>
-                  <Card sx={{ backgroundColor: darkMode ? "#2B3743" : "#fff" }}>
+                <Grid key={item.name.common} item xs={10} sm={6} md={4} lg={3}>
+                  <Card>
                     <CardActionArea
                       href={`/country/${item.name.common.replaceAll(" ", "_")}`}
                       onClick={(e) => {
@@ -141,13 +141,34 @@ function Home() {
                           {item.name.common}
                         </Typography>
                         <Typography variant="body1" gutterBottom>
-                          Population: {item.population}
+                          <Box
+                            fontWeight="bold"
+                            component="span"
+                            sx={{ marginRight: 0.25 }}
+                          >
+                            Population:
+                          </Box>
+                          {item.population}
                         </Typography>
                         <Typography variant="body1" gutterBottom>
-                          Region: {item.region}
+                          <Box
+                            fontWeight="bold"
+                            component="span"
+                            sx={{ marginRight: 0.25 }}
+                          >
+                            Region:
+                          </Box>
+                          {item.region}
                         </Typography>
                         <Typography variant="body1">
-                          Capital: {item.capital}
+                          <Box
+                            fontWeight="bold"
+                            component="span"
+                            sx={{ marginRight: 0.25 }}
+                          >
+                            Capital:
+                          </Box>
+                          {item.capital}
                         </Typography>
                       </CardContent>
                     </CardActionArea>

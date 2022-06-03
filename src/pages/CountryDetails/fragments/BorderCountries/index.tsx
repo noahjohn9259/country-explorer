@@ -39,7 +39,12 @@ function BorderCountries({ codes }: Props) {
     );
 
   return (
-    <Stack direction="row" flexWrap="wrap" columnGap={{ xs: 2.5, sm: 1 }}>
+    <Stack
+      direction="row"
+      flexWrap="wrap"
+      rowGap={1}
+      columnGap={{ xs: 2.5, sm: 1 }}
+    >
       {data?.map((item, idx) => (
         <CustomButton
           key={idx}
@@ -47,7 +52,6 @@ function BorderCountries({ codes }: Props) {
           onClick={() => {
             history.push(`/country/${item.name.common.replaceAll(" ", "_")}`);
           }}
-          sx={{ marginBottom: 1 }}
         >
           <Typography
             variant="body1"

@@ -9,11 +9,7 @@ function Header({ ...otherProps }) {
   return (
     <>
       <ElevationScroll {...otherProps}>
-        <AppBar
-          color="inherit"
-          position="fixed"
-          sx={{ backgroundColor: darkMode ? "#2B3743" : "#fff" }}
-        >
+        <AppBar color="inherit" position="fixed">
           <Container maxWidth="lg">
             <Toolbar sx={{ paddingX: 0 }}>
               <Typography
@@ -34,8 +30,7 @@ function Header({ ...otherProps }) {
                 onClick={toggleDarkMode}
                 sx={{
                   textTransform: "none",
-                  fontWeight: "400",
-                  color: "typography.allVariants.color",
+                  fontWeight: 600,
                 }}
               >
                 {darkMode ? "Light" : "Dark"} Mode

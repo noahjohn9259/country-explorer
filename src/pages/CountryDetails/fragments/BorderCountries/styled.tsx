@@ -11,7 +11,6 @@ export const CustomButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.mode === "light" ? "#000" : "#fff",
   paddingTop: theme.spacing(0.25),
   paddingBottom: theme.spacing(0.25),
-  backgroundColor: theme.palette.mode === "light" ? "#fff" : "#2B3743",
   "&:hover": {
     borderColor: "transparent",
   },

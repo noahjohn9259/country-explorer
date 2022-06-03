@@ -1,11 +1,21 @@
 import { createTheme, Theme } from "@mui/material";
 
+const FONT_SIZE = 16;
+
+const TEXT_COLOR = "hsl(200, 15%, 8%)";
+const BG_COLOR = "#fafafa";
+const PAPER_BG_COLOR = "#fff";
+
 export default (): Theme =>
   createTheme({
     palette: {
       mode: "light",
       background: {
-        default: "hsl(0, 0%, 98%)",
+        paper: PAPER_BG_COLOR,
+        default: BG_COLOR,
+      },
+      text: {
+        primary: TEXT_COLOR,
       },
     },
     components: {
@@ -41,8 +51,8 @@ export default (): Theme =>
         styleOverrides: {
           root: {
             paddingLeft: 16,
+            backgroundColor: PAPER_BG_COLOR,
             boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.07)",
-            backgroundColor: "#fff",
             ":hover": {
               ".MuiOutlinedInput-notchedOutline": {
                 boxShadow: "0px 2px 16px rgba(0, 0, 0, 0.07)",
@@ -73,18 +83,10 @@ export default (): Theme =>
       MuiPaper: {
         styleOverrides: {
           root: {
-            backgroundColor: "#fff",
             boxShadow: "0px 0px 8px rgb(0 0 0 / 5%)",
             ":hover": {
               boxShadow: "0px 4px 32px rgba(0, 0, 0, 5%)",
             },
-          },
-        },
-      },
-      MuiCardActionArea: {
-        styleOverrides: {
-          focusHighlight: {
-            backgroundColor: "#fff",
           },
         },
       },
@@ -112,9 +114,7 @@ export default (): Theme =>
       },
     },
     typography: {
-      allVariants: {
-        color: "#111517",
-      },
+      fontSize: FONT_SIZE,
       fontFamily: [
         "'Nunito Sans'",
         "-apple-system",

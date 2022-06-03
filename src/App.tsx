@@ -29,7 +29,6 @@ function App() {
       <CssBaseline />
       <GlobalStyles
         styles={{
-          body: { backgroundColor: darkMode ? "#202D36" : "#fafafa" },
           img: { height: "auto", maxWidth: "100%" },
         }}
       />
