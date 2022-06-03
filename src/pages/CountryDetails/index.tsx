@@ -86,7 +86,11 @@ function CountryDetails() {
     return (
       <>
         {data.map(({ label, value }, idx) => (
-          <Typography variant="body1" gutterBottom key={idx}>
+          <Typography
+            variant="body1"
+            marginBottom={{ xs: 2, sm: 1.5 }}
+            key={idx}
+          >
             <Box sx={{ fontWeight: 600, paddingRight: 0.5 }} component="span">
               {label}
             </Box>
@@ -125,13 +129,13 @@ function CountryDetails() {
             />
           </Box>
         </Grid>
-        <Grid item xs={12} md={6} paddingTop={{ xs: 8, sm: 0 }}>
+        <Grid item xs={12} md={6} paddingTop={{ xs: 6, sm: 0 }}>
           <Stack justifyContent="center" direction="column" height="100%">
             <Box>
               <Typography variant="h5" component="div" mb={4}>
                 {country.name.common}
               </Typography>
-              <Grid container spacing={{ xs: 6, sm: 2 }} mb={1}>
+              <Grid container spacing={{ xs: 4, sm: 2 }} mb={1}>
                 <Grid item xs={12} md={6}>
                   {contentRender(leftMetaInfo)}
                 </Grid>
@@ -140,7 +144,7 @@ function CountryDetails() {
                 </Grid>
               </Grid>
             </Box>
-            <Box paddingTop={{ xs: 6, sm: 6 }}>
+            <Box paddingTop={{ xs: 4, sm: 6 }}>
               <Box
                 sx={{ fontWeight: "bold", paddingRight: 0.5 }}
                 display="flex"

@@ -34,13 +34,12 @@ export default (): Theme =>
       MuiToolbar: {
         styleOverrides: {
           root: {
+            minHeight: 80,
             "@media (min-width: 640px)": {
-              minHeight: 80,
               paddingLeft: 0,
               paddingRight: 0,
             },
             "@media (max-width: 639px)": {
-              minHeight: 100,
               paddingLeft: 4,
               paddingRight: 4,
             },

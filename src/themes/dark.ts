@@ -22,6 +22,7 @@ export default (): Theme =>
       MuiButton: {
         styleOverrides: {
           root: {
+            backgroundColor: "#2b3743",
             fontSize: 16,
             fontWeight: 600,
             "@media (max-width: 639px)": {
@@ -34,13 +35,12 @@ export default (): Theme =>
       MuiToolbar: {
         styleOverrides: {
           root: {
+            minHeight: 80,
             "@media (min-width: 640px)": {
-              minHeight: 80,
               paddingLeft: 0,
               paddingRight: 0,
             },
             "@media (max-width: 639px)": {
-              minHeight: 100,
               paddingLeft: 4,
               paddingRight: 4,
             },
