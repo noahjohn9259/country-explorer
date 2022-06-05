@@ -1,4 +1,4 @@
-import { useEffect, useState, startTransition } from "react";
+import { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { motion } from "framer-motion";
@@ -52,11 +52,9 @@ function FlagList({ dataset, searchedText }: Props) {
       const newRecords = [...(dataset ?? [])].filter((item) =>
         item.name.common.toLowerCase().includes(searchedText.toLowerCase())
       );
-      startTransition(() => {
-        setPage(1);
-        setCurrentRecords([]);
-        setMatchedRecords(newRecords);
-      });
+      setPage(1);
+      setCurrentRecords([]);
+      setMatchedRecords(newRecords);
     }
   }, [searchedText, dataset]);
 
