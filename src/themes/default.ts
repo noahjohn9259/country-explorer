@@ -1,7 +1,5 @@
 import { createTheme, Theme } from "@mui/material";
 
-const FONT_SIZE = 16;
-
 const TEXT_COLOR = "hsl(200, 15%, 8%)";
 const BG_COLOR = "#fafafa";
 const PAPER_BG_COLOR = "#fff";
@@ -113,7 +111,6 @@ export default (): Theme =>
       },
     },
     typography: {
-      fontSize: FONT_SIZE,
       fontFamily: [
         "'Nunito Sans'",
         "-apple-system",

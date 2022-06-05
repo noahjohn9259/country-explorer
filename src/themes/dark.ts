@@ -1,7 +1,5 @@
 import { createTheme, Theme } from "@mui/material";
 
-const FONT_SIZE = 16;
-
 const TEXT_COLOR = "hsl(0, 0%, 100%)";
 const BG_COLOR = "hsl(207, 26%, 17%)";
 const PAPER_BG_COLOR = "hsl(209, 23%, 22%)";
@@ -114,7 +112,6 @@ export default (): Theme =>
       },
     },
     typography: {
-      fontSize: FONT_SIZE,
       fontFamily: [
         "'Nunito Sans'",
         "-apple-system",
@@ -129,14 +126,11 @@ export default (): Theme =>
         '"Segoe UI Symbol"',
       ].join(","),
       body1: {
-        fontSize: 16,
         "@media (max-width: 639px)": {
-          fontSize: 14,
           fontWeight: 400,
         },
       },
       subtitle2: {
-        fontSize: 16,
         fontWeight: 600,
       },
       h5: {
